@@ -37,11 +37,11 @@ export class AppComponent implements OnInit {
                     // Get shopping history by customer
                     const customerShopHistory = this.shopHistoryService.getHistoricByCustomerCpf(historic, customer.cpf);
 
-                    // Sum the shopping history
+                    // Get the first purchase
                     customers[index]['data'] = customerShopHistory.sort(this.sortByDate)[0].data;
                 });
 
-                // Sort customers by shopping history
+                // Sort customers by first purchase
                 this.mostLoyalCustomers = customers.sort(this.sortByDate).slice(0, 5);
             });
         });
