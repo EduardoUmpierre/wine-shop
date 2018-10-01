@@ -10,6 +10,7 @@ import { ShopHistoryService } from './shop-history.service';
 export class AppComponent implements OnInit {
     orderedCustomersByTotal: any[] = null;
     biggestPurchaseCustomer: any[] = null;
+    mostLoyalCustomers: any[] = null;
 
     constructor(private customerService: CustomerService, private shopHistoryService: ShopHistoryService) {
     }
@@ -20,6 +21,30 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         this.getCustomersOrderedByTotal();
         this.getCustomerWithTheBiggestPurchaseLastYear(2016);
+        this.getMostLoyalCustomers();
+    }
+
+    /**
+     *
+     */
+    private getMostLoyalCustomers() {
+
+        this.customerService.getAll().subscribe((customers) => {
+
+            this.shopHistoryService.getAll().subscribe((historic) => {
+
+                customers.forEach((customer, index) => {
+                    // Get shopping history by customer
+                    const customerShopHistory = this.shopHistoryService.getHistoricByCustomerCpf(historic, customer.cpf);
+
+                    // Sum the shopping history
+                    customers[index]['data'] = customerShopHistory.sort(this.sortByDate)[0].data;
+                });
+
+                // Sort customers by shopping history
+                this.mostLoyalCustomers = customers.sort(this.sortByDate).slice(0, 5);
+            });
+        });
     }
 
     /**
@@ -57,12 +82,7 @@ export class AppComponent implements OnInit {
 
                 customers.forEach((customer, index) => {
                     // Get shopping history by customer
-                    const customerShopHistory = historic.filter(item => {
-                        const customerCpf = this.customerService.getCleanCpf(customer.cpf);
-                        const historicItemCustomerCpf = this.shopHistoryService.getCleanCustomerCpf(item.cliente);
-
-                        return historicItemCustomerCpf === customerCpf;
-                    });
+                    const customerShopHistory = this.shopHistoryService.getHistoricByCustomerCpf(historic, customer.cpf);
 
                     // Sum the shopping history
                     customers[index]['total'] = customerShopHistory.reduce((previousValue, element) => {
@@ -74,5 +94,21 @@ export class AppComponent implements OnInit {
                 this.orderedCustomersByTotal = customers.sort((a, b) => b['total'] - a['total']);
             });
         });
+    }
+
+    /**
+     *
+     * @param a
+     * @param b
+     * @returns {number}
+     */
+    private sortByDate(a, b) {
+        let firstDate = a['data'].split('-');
+        let secondDate = b['data'].split('-');
+
+        firstDate = new Date(firstDate[2], firstDate[1], firstDate[0]);
+        secondDate = new Date(secondDate[2], secondDate[1], secondDate[0]);
+
+        return firstDate - secondDate;
     }
 }

@@ -29,14 +29,23 @@ h2 {
         > .col {
             padding: 1rem 1.5rem;
 
+            &:nth-child(3) {
+                display: none;
+            }
+
             &.option {
                 flex-grow: 0;
+                min-width: 15rem;
                 white-space: nowrap;
             }
         }
 
         &:nth-child(odd) {
             background-color: #F1F1F1;
+        }
+
+        &:not(.header):hover {
+            background-color: darken(#FFF, 10%);
         }
     }
 }
@@ -60,5 +69,20 @@ h2 {
     &:hover,
     &:active {
         text-decoration: none;
+    }
+}
+
+@media screen and (min-width: 576px) {
+    .list {
+
+        > .d-flex {
+
+            > .col {
+
+                &:nth-child(3) {
+                    display: block;
+                }
+            }
+        }
     }
 }
