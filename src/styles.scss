@@ -1,1 +1,64 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/scss/bootstrap-reboot";
+@import "~bootstrap/scss/bootstrap-grid";
+
+html {
+    font-size: 10px;
+}
+
+h1 {
+    border-bottom: 1px solid #F1F1F1;
+    font-size: 4rem;
+    line-height: 1;
+    margin: 2rem 0;
+    padding-bottom: 2rem;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.list {
+    font-size: 1.4rem;
+    margin-bottom: 4rem;
+
+    > .d-flex {
+        justify-content: space-between;
+
+        > .col {
+            padding: 1rem 1.5rem;
+
+            &.option {
+                flex-grow: 0;
+                white-space: nowrap;
+            }
+        }
+
+        &:nth-child(odd) {
+            background-color: #F1F1F1;
+        }
+    }
+}
+
+.btn {
+    border: none;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    transition: background-color 300ms ease;
+
+    &.blue {
+        background-color: #1976d2;
+        color: #FFF;
+
+        &:hover,
+        &:active {
+            background-color: darken(#1976d2, 20%);
+        }
+    }
+
+    &:hover,
+    &:active {
+        text-decoration: none;
+    }
+}
