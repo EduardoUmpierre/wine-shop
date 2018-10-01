@@ -1,0 +1,14 @@
+<h2>{{ title }}</h2>
+
+<div class="list">
+    <div class="d-flex" *ngFor="let customer of customers">
+        <div class="col col-1">{{ customer.id }}</div>
+        <div class="col">{{ customer.nome }}</div>
+        <div class="col col-3">{{ customer.cpf }}</div>
+        <div class="col option">
+            <a href="#" class="btn blue">Ver recomendação</a>
+        </div>
+    </div>
+
+    <div *ngIf="customers === null">Carregando...</div>
+</div>
