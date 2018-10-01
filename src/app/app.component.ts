@@ -9,6 +9,7 @@ import { ShopHistoryService } from './shop-history.service';
 })
 export class AppComponent implements OnInit {
     orderedCustomersByTotal: any[] = null;
+    biggestPurchaseCustomer: any[] = null;
 
     constructor(private customerService: CustomerService, private shopHistoryService: ShopHistoryService) {
     }
@@ -18,6 +19,32 @@ export class AppComponent implements OnInit {
      */
     ngOnInit() {
         this.getCustomersOrderedByTotal();
+        this.getCustomerWithTheBiggestPurchaseLastYear(2016);
+    }
+
+    /**
+     * Gets the customer with the biggest purchase
+     * @param {number} year
+     */
+    private getCustomerWithTheBiggestPurchaseLastYear(year: number) {
+
+        this.shopHistoryService.getAll().subscribe((historic) => {
+            // Filter the purchases
+            const purchasesFromLastYear = historic.filter((item) => item.data.indexOf(year) !== -1);
+
+            // Get the biggest purchase information
+            const biggestPurchase = purchasesFromLastYear.sort((a, b) => b['valorTotal'] - a['valorTotal'])[0];
+
+            this.customerService.getAll().subscribe((customers) => {
+                // Get the customer with the biggest purchase
+                this.biggestPurchaseCustomer = customers.filter(item => {
+                    const customerCpf = this.customerService.getCleanCpf(item.cpf);
+                    const historicItemCustomerCpf = this.shopHistoryService.getCleanCustomerCpf(biggestPurchase.cliente);
+
+                    return customerCpf === historicItemCustomerCpf;
+                });
+            });
+        });
     }
 
     /**
