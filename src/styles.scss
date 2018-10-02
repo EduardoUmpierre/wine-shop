@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/scss/bootstrap-reboot";
 @import "~bootstrap/scss/bootstrap-grid";
+@import "~bootstrap/scss/modal";
+@import "~bootstrap/scss/close";
 
 html {
     font-size: 10px;
@@ -23,11 +25,15 @@ h2 {
     font-size: 1.4rem;
     margin-bottom: 4rem;
 
+    > .loading,
+    > .d-flex > .col {
+        padding: 1rem 1.5rem;
+    }
+
     > .d-flex {
         justify-content: space-between;
 
         > .col {
-            padding: 1rem 1.5rem;
 
             &:nth-child(3) {
                 display: none;
@@ -69,6 +75,21 @@ h2 {
     &:hover,
     &:active {
         text-decoration: none;
+    }
+}
+
+.modal-content {
+    font-size: 1.2rem;
+
+    h2 {
+        margin-bottom: 0;
+    }
+
+    .row {
+
+        > .col {
+            margin-top: 1rem;
+        }
     }
 }
 
