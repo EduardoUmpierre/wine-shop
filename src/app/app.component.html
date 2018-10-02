@@ -1,10 +1,10 @@
 <div class="row">
     <div class="col-12 col-md-12 col-sm-12 col-lg-6">
-        <app-customer-list [(customers)]="orderedCustomersByTotal" title="Lista de clientes pelo valor total de compras"></app-customer-list>
+        <app-customer-list [(customers)]="orderedCustomersByTotal" customTitle="Lista de clientes pelo valor total de compras"></app-customer-list>
     </div>
 
     <div class="col-12 col-md-12 col-sm-12 col-lg-6">
-        <app-customer-list [(customers)]="biggestPurchaseCustomer" title="Cliente com maior compra no último ano"></app-customer-list>
-        <app-customer-list [(customers)]="mostLoyalCustomers" title="Clientes mais fiéis"></app-customer-list>
+        <app-customer-list [(customers)]="biggestPurchaseCustomer" customTitle="Cliente com maior compra no último ano"></app-customer-list>
+        <app-customer-list [(customers)]="mostLoyalCustomers" customTitle="Clientes mais fiéis"></app-customer-list>
     </div>
 </div>
