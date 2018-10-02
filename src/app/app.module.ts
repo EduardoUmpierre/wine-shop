@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { CustomerListComponent } from './customer-list/customer-list.component';
 import { HttpClientModule } from '@angular/common/http';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -12,7 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
     ],
     imports: [
         BrowserModule,
-        HttpClientModule
+        HttpClientModule,
+        NgbModule
     ],
     providers: [],
     bootstrap: [AppComponent]

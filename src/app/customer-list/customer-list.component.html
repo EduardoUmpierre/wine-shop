@@ -1,4 +1,4 @@
-<h2>{{ title }}</h2>
+<h2>{{ customTitle }}</h2>
 
 <div class="list">
     <div class="d-flex header">
@@ -13,9 +13,51 @@
         <div class="col">{{ customer.nome }}</div>
         <div class="col col-3">{{ customer.cpf }}</div>
         <div class="col option">
-            <a href="#" class="btn blue">Ver recomendação</a>
+            <a href="#" (click)="open(content, customer.id)" class="btn blue">Ver recomendação</a>
         </div>
     </div>
 
-    <div *ngIf="customers === null">Carregando...</div>
+    <div *ngIf="customers === null" class="loading">Carregando...</div>
 </div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Recomendação</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div *ngIf="recommendation !== null">
+            <h2>{{ recommendation.produto }}</h2>
+
+            <div class="row">
+                <div class="col col-12 col-lg-4">
+                    Categoria: {{ recommendation.categoria }}
+                </div>
+
+                <div class="col col-12 col-lg-8">
+                    Variedade: {{ recommendation.variedade }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-12 col-lg-4">
+                    Safra: {{ recommendation.safra }}
+                </div>
+
+                <div class="col col-12 col-lg-4">
+                    País: {{ recommendation.pais }}
+                </div>
+
+                <div class="col col-12 col-lg-4">
+                    Preço: {{ recommendation.preco }}
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="recommendation === null" class="loading">
+            Carregando...
+        </div>
+    </div>
+</ng-template>
