@@ -17,12 +17,21 @@ export class CustomerListComponent {
     constructor(private customerService: CustomerService, private shopHistoryService: ShopHistoryService, private modalService: NgbModal) {
     }
 
+    /**
+     * Opens the recommendation modal
+     * @param content
+     * @param {number} id
+     */
     open(content, id: number) {
         this.getRecommendation(id);
 
         this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
     }
 
+    /**
+     * Generates the recommendation based on the customer shop history
+     * @param {number} id
+     */
     private getRecommendation(id: number) {
         this.recommendation = null;
 
@@ -46,8 +55,6 @@ export class CustomerListComponent {
                     const recommendedIndex = Math.floor(Math.random() * items.length);
 
                     this.recommendation = items[recommendedIndex];
-
-                    console.log(this.recommendation);
                 });
             });
         });

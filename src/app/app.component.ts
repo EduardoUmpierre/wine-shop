@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
     }
 
     /**
-     *
+     * Get the dashboard data on component init
      */
     ngOnInit() {
         this.getCustomersOrderedByTotal();
@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
     }
 
     /**
-     *
+     * Get the most loyal customers data
      */
     private getMostLoyalCustomers() {
 
@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
                     // Get shopping history by customer
                     const customerShopHistory = this.shopHistoryService.getHistoricByCustomerCpf(historic, customer.cpf);
 
-                    // Get the first purchase
+                    // Get the first purchase sorted by date
                     customers[index]['data'] = customerShopHistory.sort(this.sortByDate)[0].data;
                 });
 
@@ -97,7 +97,7 @@ export class AppComponent implements OnInit {
     }
 
     /**
-     *
+     * Sort two dates
      * @param a
      * @param b
      * @returns {number}

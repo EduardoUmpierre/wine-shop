@@ -11,6 +11,10 @@ export class ShopHistoryService {
     constructor(private http: HttpClient, private customerService: CustomerService) {
     }
 
+    /**
+     * Get all customer shop history data
+     * @returns {Observable<any>}
+     */
     getAll(): Observable<any> {
         return this.http.get('http://www.mocky.io/v2/598b16861100004905515ec7');
     }

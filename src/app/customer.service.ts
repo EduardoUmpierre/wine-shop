@@ -10,6 +10,10 @@ export class CustomerService {
     constructor(private http: HttpClient) {
     }
 
+    /**
+     * Get all customers
+     * @returns {Observable<any>}
+     */
     getAll(): Observable<any> {
         return this.http.get('http://www.mocky.io/v2/598b16291100004705515ec5');
     }
